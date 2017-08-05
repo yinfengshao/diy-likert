@@ -1,0 +1,12 @@
+Group,Subgroup,Strongly Disagree,Disagree,Neutral,Agree,Strongly Agree
+Question 1,Everyone,25,77,45,51,13
+Question 1,Women,6,27,18,16,7
+Question 1,Men,19,49,27,33,6
+Question 1,Designers,3,14,12,15,3
+Question 1,Engineers,16,46,22,28,5
+Question 2,Everyone,7,39,40,97,28
+Question 2,Women,3,19,15,29,8
+Question 2,Men,4,20,24,66,20
+Question 2,Designers,0,10,14,16,7
+Question 2,Engineers,4,17,19,62,15
+Question 2,Scientists,0,3,4,6,1

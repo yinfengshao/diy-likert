@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+ <title>DIY Likert</title>
+ <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+ <link rel="stylesheet" href="css/base.css">
+</head>
+
+<body>
+    
+ <div class="pure-g">
+  <div id="input" class="pure-u-1-5">
+   <p>DIY Likert Charts</p>
+   <p><a href="data/sample.csv">Sample CSV</a></p>
+   <form class="pure-form">
+    <fieldset class="pure-group">
+     <input id="title-input" class="pure-input-1" type="text" placeholder="Title">
+     <input id="bar-width" class="pure-input-1" type="text" placeholder="Bar width (default = 480)">
+     <input id="bar-height" class="pure-input-1" type="text" placeholder="Bar height (default = 20)">
+     <input id="font-input" class="pure-input-1" type="text" placeholder="Font (default = Courier)">
+     <textarea class="pure-input-1" placeholder="Include a header row: Group,Subgroup,..."></textarea>
+    </fieldset>
+    <div class="pure-button-group" role="group">
+     <button id="draw" type="button" class="pure-button pure-input-1-2">Draw</button>
+     <button id="save" type="button" class="pure-button pure-input-1-2">Save</button>
+    </div>
+   </form>
+   <p><a href="https://github.com/yinfengshao/diy-likert">DIY Likert</a> is a weekend project built with <a href="https://d3js.org">D3</a> under the <a href="LICENSE">MIT License</a>.</p>
+   <p>Please send me feedback at diy dot likert at gmail -- I look forward to improving this with your suggestions.</p>
+  </div>
+  <div id="output" class="pure-u-3-4">
+   <svg width="1" height="1"></svg>
+  </div>
+ </div>
+
+</body>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="js/graph.js"></script>
+
+</html>

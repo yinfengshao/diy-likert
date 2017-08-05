@@ -1,0 +1,55 @@
+* {
+ font-family: sans-serif;
+ font-size: 14px;
+}
+
+fieldset {
+ font-family: courier;
+ font-size: 12px;
+}
+
+svg text {
+ font-family: courier;
+ font-size: 12px;
+}
+
+textarea {
+ resize: none;
+ height: 300px;
+}
+
+g.y-axis path.domain {
+ stroke: none;
+}
+
+rect.grid {
+ fill: none;
+ stroke: grey;
+}
+
+text.bar-text {
+ text-anchor: middle;
+}
+
+#input {
+ padding: 1em;
+ position: fixed;
+}
+
+#graph-title {
+ font-size: 14px;
+ text-anchor: middle;
+}
+
+#legend-negative {
+ text-anchor: end;
+}
+
+#legend-positive {
+ text-anchor: start;
+}
+
+#output {
+ padding: 0.5em;
+ margin-left: 20%;
+}
