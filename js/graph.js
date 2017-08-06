@@ -61,25 +61,21 @@ function updateChart(data) {
 
  // Define categorical arrays from the data. This is needed early to define the size of the graphic.
 
- var group = unique(data.map(function(d) { return d.Group; }));
- var subgroup = unique(data.map(function(d) { return d.Subgroup; }));
+ var group = function() { return d3.select('#transpose').property('checked') ? unique(data.map(function(d) { return d.Subgroup; })) : unique(data.map(function(d) { return d.Group; })); } ();
+ var subgroup = function() { return d3.select('#transpose').property('checked') ? unique(data.map(function(d) { return d.Group; })) : unique(data.map(function(d) { return d.Subgroup; })); } ();
  var key = data.columns.slice(2);
 
  // Change font in stylesheet.
 
- var font = 'courier';
- if(d3.select('#font-input').node().value) font = d3.select('#font-input').node().value;
+ var font = function() { return d3.select('#font-input').node().value ? d3.select('#font-input').node().value : 'courier'; } ();
  var sheet = document.styleSheets[1];
  sheet.deleteRule(2);
  sheet.insertRule('svg text { font-family: ' + font + '; font-size: 12px; }', 2);
 
  // Get bar width and height.
 
- var barWidth = 480;
- var barHeight = 20;
-
- if(d3.select('#bar-width').node().value) barWidth = +d3.select('#bar-width').node().value;
- if(d3.select('#bar-height').node().value) barHeight = +d3.select('#bar-height').node().value;
+ var barWidth = function() { return d3.select('#bar-width').node().value ? +d3.select('#bar-width').node().value : 480; } ();
+ var barHeight = function() { return d3.select('#bar-height').node().value ? +d3.select('#bar-height').node().value : 20; } ();
 
  // Apply basic formatting.
 
@@ -136,8 +132,7 @@ function updateChart(data) {
 
  // Draw title.
 
- var titleText = 'Title';
- if(d3.select('#title-input').node().value) titleText = d3.select('#title-input').node().value;
+ var titleText = function() { return d3.select('#title-input').node().value ? d3.select('#title-input').node().value : 'Title'; } ();
 
  var graphTitle = title.selectAll('#graph-title')
  .data([titleText]);
@@ -279,14 +274,14 @@ function updateChart(data) {
  .data(function(d) { return d; });
 
  bar.attr('x', function(d) { return x(d[0]); })
- .attr('y', function(d) { return y(d.data['Group']) + yInner(d.data['Subgroup']); })
+ .attr('y', function(d) { return d3.select('#transpose').property('checked') ? y(d.data['Subgroup']) + yInner(d.data['Group']) : y(d.data['Group']) + yInner(d.data['Subgroup']); })
  .attr('width', function(d) { return x(d[1]) - x(d[0]); })
  .attr('height', yInner.bandwidth());
 
  bar.enter().append('rect')
  .classed('bar', true)
  .attr('x', function(d) { return x(d[0]); })
- .attr('y', function(d) { return y(d.data['Group']) + yInner(d.data['Subgroup']); })
+ .attr('y', function(d) { return d3.select('#transpose').property('checked') ? y(d.data['Subgroup']) + yInner(d.data['Group']) : y(d.data['Group']) + yInner(d.data['Subgroup']); })
  .attr('width', function(d) { return x(d[1]) - x(d[0]); })
  .attr('height', yInner.bandwidth());
 
@@ -300,7 +295,7 @@ function updateChart(data) {
  .enter().append('rect')
  .classed('bar', true)
  .attr('x', function(d) { return x(d[0]); })
- .attr('y', function(d) { return y(d.data['Group']) + yInner(d.data['Subgroup']); })
+ .attr('y', function(d) { return d3.select('#transpose').property('checked') ? y(d.data['Subgroup']) + yInner(d.data['Group']) : y(d.data['Group']) + yInner(d.data['Subgroup']); })
  .attr('width', function(d) { return x(d[1]) - x(d[0]); })
  .attr('height', yInner.bandwidth());
 
@@ -308,41 +303,49 @@ function updateChart(data) {
 
  // Add text to bars.
 
- var barTextGroup = graph.selectAll('g.bar-text-group')
- .data(d3.stack().keys(key).offset(likert)(data));
+ if(d3.select('#hide-numbers').property('checked')) {
 
- barTextGroup.attr('fill', function(d) { return colorText(d.index); });
+  graph.selectAll('g.bar-text-group').remove();
 
- var barText = barTextGroup.selectAll('text.bar-text')
- .data(function(d) { return d; })
+ } else {
 
- barText.attr('x', function(d) { return (x(d[0]) + x(d[1])) / 2; })
- .attr('y', function(d) { return y(d.data['Group']) + yInner(d.data['Subgroup']); })
- .attr('dy', barHeight * 0.5 + 3)
- .text(function(d) { return (x(d[1]) - x(d[0])) > 7 ? Math.round(xInverse(x(d[1]) - x(d[0]))) : ''; });
+  var barTextGroup = graph.selectAll('g.bar-text-group')
+  .data(d3.stack().keys(key).offset(likert)(data));
 
- barText.enter().append('text')
- .classed('bar-text', true)
- .attr('x', function(d) { return (x(d[0]) + x(d[1])) / 2; })
- .attr('y', function(d) { return y(d.data['Group']) + yInner(d.data['Subgroup']); })
- .attr('dy', barHeight * 0.5 + 3)
- .text(function(d) { return (x(d[1]) - x(d[0])) > 7 ? Math.round(xInverse(x(d[1]) - x(d[0]))) : ''; });
+  barTextGroup.attr('fill', function(d) { return colorText(d.index); });
 
- barText.exit().remove();
+  var barText = barTextGroup.selectAll('text.bar-text')
+  .data(function(d) { return d; })
 
- barTextGroup.enter().append('g')
- .classed('bar-text-group', true)
- .attr('fill', function(d) { return colorText(d.index); })
- .selectAll('text')
- .data(function(d) { return d; })
- .enter().append('text')
- .classed('bar-text', true)
- .attr('x', function(d) { return (x(d[0]) + x(d[1])) / 2; })
- .attr('y', function(d) { return y(d.data['Group']) + yInner(d.data['Subgroup']); })
- .attr('dy', barHeight * 0.5 + 3)
- .text(function(d) { return (x(d[1]) - x(d[0])) > 7 ? Math.round(xInverse(x(d[1]) - x(d[0]))) : ''; });
+  barText.attr('x', function(d) { return (x(d[0]) + x(d[1])) / 2; })
+  .attr('y', function(d) { return d3.select('#transpose').property('checked') ? y(d.data['Subgroup']) + yInner(d.data['Group']) : y(d.data['Group']) + yInner(d.data['Subgroup']); })
+  .attr('dy', barHeight * 0.5 + 3)
+  .text(function(d) { return (x(d[1]) - x(d[0])) > 7 ? Math.round(xInverse(x(d[1]) - x(d[0]))) : ''; });
 
- barTextGroup.exit().remove();
+  barText.enter().append('text')
+  .classed('bar-text', true)
+  .attr('x', function(d) { return (x(d[0]) + x(d[1])) / 2; })
+  .attr('y', function(d) { return d3.select('#transpose').property('checked') ? y(d.data['Subgroup']) + yInner(d.data['Group']) : y(d.data['Group']) + yInner(d.data['Subgroup']); })
+  .attr('dy', barHeight * 0.5 + 3)
+  .text(function(d) { return (x(d[1]) - x(d[0])) > 7 ? Math.round(xInverse(x(d[1]) - x(d[0]))) : ''; });
+
+  barText.exit().remove();
+
+  barTextGroup.enter().append('g')
+  .classed('bar-text-group', true)
+  .attr('fill', function(d) { return colorText(d.index); })
+  .selectAll('text')
+  .data(function(d) { return d; })
+  .enter().append('text')
+  .classed('bar-text', true)
+  .attr('x', function(d) { return (x(d[0]) + x(d[1])) / 2; })
+  .attr('y', function(d) { return d3.select('#transpose').property('checked') ? y(d.data['Subgroup']) + yInner(d.data['Group']) : y(d.data['Group']) + yInner(d.data['Subgroup']); })
+  .attr('dy', barHeight * 0.5 + 3)
+  .text(function(d) { return (x(d[1]) - x(d[0])) > 7 ? Math.round(xInverse(x(d[1]) - x(d[0]))) : ''; });
+
+  barTextGroup.exit().remove();
+
+ }
 
 }
 
