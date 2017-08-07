@@ -11,15 +11,16 @@
     
  <div class="pure-g">
   <div id="input" class="pure-u-1-4">
-   <p>DIY Likert Charts</p>
-   <p><a href="data/sample.csv">Sample CSV</a></p>
+   <h3>DIY Likert</h3>
+   <p>Build bar charts from your histogrammed Likert data. Visually compare responses across questions and respondent segments. Format and save to SVG with code that runs locally: your data stays private.</p>
+   <p><a href="data/sample.csv">Sample csv input</a></p>
    <form class="pure-form">
     <fieldset class="pure-group">
      <input id="title-input" class="pure-input-1" type="text" placeholder="Title">
      <input id="bar-width" class="pure-input-1" type="text" placeholder="Bar width (default = 480, 80 vertical)">
      <input id="bar-height" class="pure-input-1" type="text" placeholder="Bar height (default = 40, 240 vertical)">
      <input id="font-input" class="pure-input-1" type="text" placeholder="Font (default = Courier)">
-     <textarea class="pure-input-1" placeholder="Include a header row: Group,Subgroup,..."></textarea>
+     <textarea class="pure-input-1" placeholder="Paste csv here. Include a header row: Group,Subgroup,..."></textarea>
     </fieldset>
     <div class="pure-g">
     <div class="pure-u-1-2">
@@ -54,12 +55,11 @@
     </div>
     </div>
     <div class="pure-button-group" role="group">
-     <button id="draw" type="button" class="pure-button pure-input-1-2">Draw</button>
-     <button id="save" type="button" class="pure-button pure-input-1-2">Save</button>
+     <button id="draw" type="button" class="pure-button pure-button-primary pure-input-1-2">Draw</button>
+     <button id="save" type="button" class="pure-button pure-button-primary pure-input-1-2">Save</button>
     </div>
    </form>
-   <p><a href="https://github.com/yinfengshao/diy-likert">DIY Likert</a> is a weekend project built with <a href="https://d3js.org">D3</a> under the <a href="LICENSE">MIT License</a>.</p>
-   <p>Please send me feedback at diy dot likert at gmail -- I look forward to improving this with your suggestions.</p>
+   <p><a href="https://github.com/yinfengshao/diy-likert">DIY Likert</a> is a weekend project built with <a href="https://d3js.org">D3</a> under the <a href="LICENSE">MIT License</a>. Please send me feedback at diy dot likert at gmail -- I'd like to improve this with your help.</p>
   </div>
   <div id="output" class="pure-u-3-4">
    <svg width="1" height="1"></svg>
