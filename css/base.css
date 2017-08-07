@@ -22,7 +22,7 @@ g.y-axis path.domain {
  stroke: none;
 }
 
-rect.grid {
+rect.border {
  fill: none;
  stroke: grey;
 }
@@ -50,6 +50,6 @@ text.bar-text {
 }
 
 #output {
- padding: 0.5em;
- margin-left: 20%;
+ padding: 1em;
+ margin-left: 25%;
 }

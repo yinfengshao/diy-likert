@@ -10,24 +10,49 @@
 <body>
     
  <div class="pure-g">
-  <div id="input" class="pure-u-1-5">
+  <div id="input" class="pure-u-1-4">
    <p>DIY Likert Charts</p>
    <p><a href="data/sample.csv">Sample CSV</a></p>
    <form class="pure-form">
     <fieldset class="pure-group">
      <input id="title-input" class="pure-input-1" type="text" placeholder="Title">
-     <input id="bar-width" class="pure-input-1" type="text" placeholder="Bar width (default = 480)">
-     <input id="bar-height" class="pure-input-1" type="text" placeholder="Bar height (default = 20)">
+     <input id="bar-width" class="pure-input-1" type="text" placeholder="Bar width (default = 480, 80 vertical)">
+     <input id="bar-height" class="pure-input-1" type="text" placeholder="Bar height (default = 40, 240 vertical)">
      <input id="font-input" class="pure-input-1" type="text" placeholder="Font (default = Courier)">
      <textarea class="pure-input-1" placeholder="Include a header row: Group,Subgroup,..."></textarea>
     </fieldset>
-    <label for="hide-numbers" class="pure-checkbox">
-     <input id="hide-numbers" type="checkbox" value=""> Hide percentages
+    <div class="pure-g">
+    <div class="pure-u-1-2">
+    <label for="hide-borders" class="pure-checkbox">
+     <input id="hide-borders" type="checkbox" value=""> Hide borders
     </label>
-    <label for="transpose" class="pure-checkbox">
-     <input id="transpose" type="checkbox" value=""> Transpose groupings
+    <label for="hide-percentages" class="pure-checkbox">
+     <input id="hide-percentages" type="checkbox" value=""> Hide percentages
+    </label>
+    <label for="cluster" class="pure-checkbox">
+     <input id="cluster" type="checkbox" value=""> Cluster by subgroup
+    </label>
+    <label for="vertical-bars" class="pure-checkbox">
+     <input id="vertical-bars" type="checkbox" value=""> Vertical bars
     </label>
     <p></p>
+    </div>
+    <div class="pure-u-1-2">
+    <label for="color-choice-1" class="pure-radio">
+     <input id="color-choice-1" type="radio" name="color-choice" value="red-blue" checked> Red-Blue
+    </label>
+    <label for="color-choice-2" class="pure-radio">
+     <input id="color-choice-2" type="radio" name="color-choice" value="red-yellow-green"> Red-Yellow-Green
+    </label>
+    <label for="color-choice-3" class="pure-radio">
+     <input id="color-choice-3" type="radio" name="color-choice" value="pink-green"> Pink-Green
+    </label>
+    <label for="color-choice-4" class="pure-radio">
+     <input id="color-choice-4" type="radio" name="color-choice" value="purple-orange"> Purple-Orange
+    </label>
+    <p></p>
+    </div>
+    </div>
     <div class="pure-button-group" role="group">
      <button id="draw" type="button" class="pure-button pure-input-1-2">Draw</button>
      <button id="save" type="button" class="pure-button pure-input-1-2">Save</button>
