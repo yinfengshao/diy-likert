@@ -245,7 +245,7 @@ function updateChartHorizontal(data) {
  .attr('y', function(d) { return y(d); })
  .attr('dx', 0)
  .attr('dy', yPadding * -0.25)
- .attr('text-anchor', 'middle')
+ // .attr('text-anchor', 'middle')
  .text(function(d) { return d; });
  xHeader.enter().append('text')
  .classed('x-header', true)
@@ -253,7 +253,7 @@ function updateChartHorizontal(data) {
  .attr('y', function(d) { return y(d); })
  .attr('dx', 0)
  .attr('dy', yPadding * -0.25)
- .attr('text-anchor', 'middle')
+ // .attr('text-anchor', 'middle')
  .text(function(d) { return d; });
  xHeader.exit().remove();
 
