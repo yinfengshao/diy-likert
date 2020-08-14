@@ -241,7 +241,7 @@ function updateChartHorizontal(data) {
 
  // Draw headers for groups.
  var xHeader = graph.selectAll('text.x-header').data(group);
- xHeader.attr('x', x(0))
+ xHeader.attr('x', 0 /*x(0)*/ )
  .attr('y', function(d) { return y(d); })
  .attr('dx', 0)
  .attr('dy', yPadding * -0.25)
@@ -249,7 +249,7 @@ function updateChartHorizontal(data) {
  .text(function(d) { return d; });
  xHeader.enter().append('text')
  .classed('x-header', true)
- .attr('x', x(0))
+ .attr('x', 0 /*x(0)*/ )
  .attr('y', function(d) { return y(d); })
  .attr('dx', 0)
  .attr('dy', yPadding * -0.25)
